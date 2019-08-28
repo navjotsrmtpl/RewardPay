@@ -217,11 +217,30 @@
     <script src="js/init.js"></script>
 
     <script>
+
       var app = angular.module('myApp', []);
       app.controller('myCtrl', function ($scope, $location) {
         $scope.createLink = function () {
+          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+var url = '';
+        Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+        url = 'https://play.google.com/store/apps/details?id=com.ionicframework.snowapp184742&hl=en';
+        //alert ('WINDOW');
+        // return url;
+        }else if (/android/i.test(userAgent)) {
+        url = 'https://play.google.com/store/apps/details?id=com.ionicframework.snowapp184742&hl=en';
+
+        }else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        url = 'https://itunes.apple.com/us/app/fselite-connect/id1280947052?ls=1&mt=8';
+        // return url;
+        }else{
+        //alert('browser');
+        url = 'http://fselite.srmtechsol.com';
+        // return url;
+        }
           window.location = 'RewardPay://localhost:8100/?email=writetodhirendra@gmail.com &password= aaaaaaaa';            setTimeout(function () {
-            window.location = 'https://play.google.com/store/apps/details?id=com.ionicframework.snowapp184742&hl=en';
+            window.location = url;
           }, 2000);
         }
 
